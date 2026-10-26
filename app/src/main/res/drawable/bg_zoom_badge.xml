@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Rounded dark pill behind the "2.4x" zoom label so it stays readable on any photo -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/media_overlay_scrim" />
+    <corners android:radius="@dimen/zoom_badge_corner_radius" />
+</shape>

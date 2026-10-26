@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    The four main features shown in the navigation drawer, in the order required by the assignment.
+    Each item ID matches a destination ID in res/navigation/nav_graph.xml, which is how
+    NavigationUI knows which screen to open and which item to highlight.
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/group_features"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_broadcast"
+            android:icon="@drawable/ic_broadcast"
+            android:title="@string/menu_broadcast_receiver" />
+        <item
+            android:id="@+id/nav_image_scale"
+            android:icon="@drawable/ic_zoom_in"
+            android:title="@string/menu_image_scale" />
+        <item
+            android:id="@+id/nav_video"
+            android:icon="@drawable/ic_movie"
+            android:title="@string/menu_video" />
+        <item
+            android:id="@+id/nav_audio"
+            android:icon="@drawable/ic_music_note"
+            android:title="@string/menu_audio" />
+    </group>
+</menu>

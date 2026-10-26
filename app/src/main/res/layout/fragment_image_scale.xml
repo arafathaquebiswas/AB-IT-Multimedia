@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- B. Image Scale: an internet photo inside ZoomableImageView (pinch, pan, double-tap) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".image.ImageScaleFragment">
+
+    <FrameLayout
+        android:id="@+id/image_stage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="?attr/colorSurfaceContainer">
+
+        <com.abit.multimedia.image.ZoomableImageView
+            android:id="@+id/zoomable_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/image_content_description"
+            android:scaleType="matrix" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/image_loading_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/image_loading"
+            android:indeterminate="true" />
+
+        <LinearLayout
+            android:id="@+id/image_error_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/screen_padding"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <ImageView
+                android:layout_width="@dimen/error_icon_size"
+                android:layout_height="@dimen/error_icon_size"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_error_outline"
+                app:tint="?attr/colorError" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
+                android:gravity="center"
+                android:text="@string/image_error"
+                android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/image_retry_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:text="@string/retry"
+                app:icon="@drawable/ic_refresh" />
+        </LinearLayout>
+
+        <!-- Current zoom, e.g. "2.4x" -->
+        <TextView
+            android:id="@+id/zoom_level_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_margin="@dimen/space_m"
+            android:background="@drawable/bg_zoom_badge"
+            android:paddingStart="@dimen/space_s"
+            android:paddingTop="@dimen/space_xs"
+            android:paddingEnd="@dimen/space_s"
+            android:paddingBottom="@dimen/space_xs"
+            android:textAppearance="?attr/textAppearanceLabelLarge"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            tools:text="1.0x"
+            tools:visibility="visible" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/zoom_hint_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/space_s"
+        android:text="@string/zoom_hint"
+        android:textAppearance="?attr/textAppearanceBodyMedium" />
+
+    <include layout="@layout/view_footer_watermark" />
+</LinearLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Toolbar overflow menu. "About" is a secondary screen, so it lives here instead of in the
+    drawer (the drawer must contain exactly the four main features).
+    menuCategory="secondary" tells NavigationUI to open About on top of the current screen,
+    so Back returns to where the user was.
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_about"
+        android:menuCategory="secondary"
+        android:title="@string/menu_about"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- "Developed by AB IT" footer shown at the bottom of every screen (layout/view_footer_watermark.xml) -->
+    <style name="Widget.ABITMultimedia.FooterWatermark" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">?attr/textAppearanceLabelMedium</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">@dimen/footer_padding_horizontal</item>
+        <item name="android:paddingEnd">@dimen/footer_padding_horizontal</item>
+        <item name="android:paddingTop">@dimen/footer_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/footer_padding_vertical</item>
+    </style>
+
+    <!-- Section heading inside cards -->
+    <style name="TextAppearance.ABITMultimedia.CardLabel" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <!-- Outlined card used for grouping content on the broadcast, audio and about screens -->
+    <style name="Widget.ABITMultimedia.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="contentPadding">@dimen/space_m</item>
+    </style>
+</resources>

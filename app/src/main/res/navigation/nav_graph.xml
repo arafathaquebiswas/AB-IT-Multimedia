@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Navigation graph of MainActivity's NavHostFragment.
+    The first four destinations are the top-level drawer screens (same IDs as the drawer menu items).
+    Each android:label becomes the toolbar title through NavigationUI.
+    Activity 2 and Activity 3 of the broadcast flow are separate Activities started with explicit
+    Intents, so they are not part of this graph.
+-->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_broadcast">
+
+    <fragment
+        android:id="@+id/nav_broadcast"
+        android:name="com.abit.multimedia.broadcast.BroadcastFragment"
+        android:label="@string/menu_broadcast_receiver"
+        tools:layout="@layout/fragment_broadcast" />
+
+    <fragment
+        android:id="@+id/nav_image_scale"
+        android:name="com.abit.multimedia.image.ImageScaleFragment"
+        android:label="@string/menu_image_scale"
+        tools:layout="@layout/fragment_image_scale" />
+
+    <fragment
+        android:id="@+id/nav_video"
+        android:name="com.abit.multimedia.video.VideoFragment"
+        android:label="@string/menu_video"
+        tools:layout="@layout/fragment_video" />
+
+    <fragment
+        android:id="@+id/nav_audio"
+        android:name="com.abit.multimedia.audio.AudioFragment"
+        android:label="@string/menu_audio"
+        tools:layout="@layout/fragment_audio" />
+
+    <!-- Secondary screen opened from the toolbar overflow menu or the drawer header -->
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.abit.multimedia.about.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about" />
+
+</navigation>

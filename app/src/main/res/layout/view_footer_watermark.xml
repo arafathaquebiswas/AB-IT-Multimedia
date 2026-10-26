@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Shared "Developed by AB IT" footer, added to every screen with <include>.
+    Screens place it after their (scrolling) content in a vertical LinearLayout, so it always
+    sits below the content and can never overlap buttons, text or media controls.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/footer_watermark_text"
+        style="@style/Widget.ABITMultimedia.FooterWatermark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/footer_watermark" />
+</LinearLayout>

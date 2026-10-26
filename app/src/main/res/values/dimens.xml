@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing scale -->
+    <dimen name="space_xs">4dp</dimen>
+    <dimen name="space_s">8dp</dimen>
+    <dimen name="space_m">16dp</dimen>
+    <dimen name="space_l">24dp</dimen>
+    <dimen name="space_xl">32dp</dimen>
+
+    <!-- Padding around the content of every screen -->
+    <dimen name="screen_padding">24dp</dimen>
+    <!-- Keeps forms and cards readable on tablets and in landscape -->
+    <dimen name="content_max_width">560dp</dimen>
+
+    <!-- Accessibility: minimum size of anything the user can touch -->
+    <dimen name="touch_target_min">48dp</dimen>
+
+    <!-- Footer watermark -->
+    <dimen name="footer_padding_vertical">8dp</dimen>
+    <dimen name="footer_padding_horizontal">16dp</dimen>
+
+    <!-- Logo sizes -->
+    <dimen name="nav_header_logo_size">64dp</dimen>
+    <dimen name="about_logo_size">128dp</dimen>
+
+    <!-- Broadcast screens -->
+    <dimen name="spinner_min_width">280dp</dimen>
+    <dimen name="battery_progress_thickness">12dp</dimen>
+    <dimen name="battery_progress_corner_radius">6dp</dimen>
+    <dimen name="status_icon_size">20dp</dimen>
+
+    <!-- Image Scale -->
+    <dimen name="zoom_badge_corner_radius">16dp</dimen>
+    <dimen name="error_icon_size">48dp</dimen>
+
+    <!-- Audio player -->
+    <dimen name="audio_artwork_size">160dp</dimen>
+    <dimen name="audio_artwork_icon_size">88dp</dimen>
+    <dimen name="audio_play_button_size">72dp</dimen>
+    <dimen name="audio_play_icon_size">36dp</dimen>
+    <dimen name="audio_stop_button_size">56dp</dimen>
+    <dimen name="audio_stop_icon_size">28dp</dimen>
+    <!-- Round icon buttons use their full size (Material adds a 4dp inset by default) -->
+    <dimen name="button_inset_none">0dp</dimen>
+</resources>

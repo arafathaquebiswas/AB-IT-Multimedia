@@ -2,15 +2,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--
+        The only permission the app needs: Image Scale downloads its photo from the internet.
+        ACTION_BATTERY_CHANGED is a protected system broadcast and needs no permission, and the
+        custom broadcast stays inside this app.
+    -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ABITMultimedia">
+        android:theme="@style/Theme.ABITMultimedia"
+        tools:targetApi="33">
+
+        <!-- The launcher starts this Activity, so it is the only exported one. -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -20,6 +31,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Broadcast flow, Activity 2 and Activity 3: only started from inside this app. -->
+        <activity
+            android:name=".broadcast.BroadcastInputActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".broadcast.CustomReceiverActivity"
+            android:exported="false" />
+
+        <!--
+            CustomMessageReceiver is deliberately NOT declared here.
+            CustomReceiverActivity registers it at runtime while it is visible.
+        -->
     </application>
 
 </manifest>

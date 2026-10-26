@@ -1,3 +1,120 @@
 <resources>
     <string name="app_name">AB IT Multimedia</string>
+
+    <!-- Branding and student information -->
+    <string name="footer_watermark">Developed by AB IT</string>
+    <string name="brand_name">AB IT</string>
+    <string name="logo_content_description">AB IT logo</string>
+    <string name="student_name">Arafat Haque Biswas</string>
+    <string name="student_id">24241325</string>
+    <string name="student_id_format">ID: %1$s</string>
+    <string name="university_name">BRAC University</string>
+    <string name="course_name">CSE 489 — Mobile Application Development</string>
+    <string name="assignment_name">Assignment 2</string>
+    <string name="nav_header_course_line">CSE 489 · Assignment 2 · BRAC University</string>
+    <string name="nav_header_open_about">Open the About screen</string>
+
+    <!-- Navigation drawer: the four main features, in the required order -->
+    <string name="menu_broadcast_receiver">Broadcast Receiver</string>
+    <string name="menu_image_scale">Image Scale</string>
+    <string name="menu_video">Video</string>
+    <string name="menu_audio">Audio</string>
+    <string name="menu_about">About</string>
+    <string name="navigate_up">Navigate up</string>
+
+    <!-- A. Broadcast Receiver: selection screen -->
+    <string name="broadcast_select_title">Select a broadcast type</string>
+    <string name="broadcast_spinner_content_description">Broadcast type</string>
+    <string-array name="broadcast_types">
+        <item>Custom broadcast receiver</item>
+        <item>System battery notification receiver</item>
+    </string-array>
+    <!-- Shown under the spinner; same order as broadcast_types -->
+    <string-array name="broadcast_type_descriptions">
+        <item>Type a message on the next screen. The third screen registers CustomMessageReceiver and then broadcasts your text to it.</item>
+        <item>The next screen listens to the system ACTION_BATTERY_CHANGED broadcast and shows the live battery level.</item>
+    </string-array>
+    <string name="proceed">Proceed</string>
+
+    <!-- A. Activity 2: custom message input -->
+    <string name="title_custom_broadcast">Custom broadcast</string>
+    <string name="custom_input_heading">Message for the receiver</string>
+    <string name="custom_input_description">Enter plain text. It is passed to the next screen in an Intent extra, and that screen sends it to its registered CustomMessageReceiver as a broadcast.</string>
+    <string name="message_to_broadcast">Message to broadcast</string>
+    <string name="send_to_receiver">Send to receiver</string>
+    <string name="error_message_blank">Please enter a message to broadcast</string>
+
+    <!-- A. Activity 2: battery status -->
+    <string name="title_battery_status">Battery status</string>
+    <string name="battery_heading">System battery notification receiver</string>
+    <string name="battery_description">While this screen is visible it registers a receiver for Intent.ACTION_BATTERY_CHANGED and updates whenever the system reports a change.</string>
+    <string name="battery_percent_format">%1$d%%</string>
+    <string name="battery_percent_unknown">Unknown</string>
+    <string name="battery_level_content_description">Battery level</string>
+    <string name="battery_charging_status_format">Status: %1$s</string>
+    <string name="battery_updated_format">Last update: %1$s</string>
+    <string name="battery_waiting">Waiting for the battery broadcast…</string>
+    <string name="battery_status_charging">Charging</string>
+    <string name="battery_status_discharging">Discharging</string>
+    <string name="battery_status_full">Full</string>
+    <string name="battery_status_not_charging">Not charging</string>
+    <string name="battery_status_unknown">Unknown</string>
+    <string name="next">Next</string>
+
+    <!-- A. Activity 3: custom receiver / battery note -->
+    <string name="title_custom_receiver">Custom receiver</string>
+    <string name="title_battery_receiver">Battery receiver</string>
+    <string name="receiver_status_label">Receiver status</string>
+    <string name="receiver_registered">Registered</string>
+    <string name="receiver_not_registered">Not registered</string>
+    <string name="receiver_action_format">Listening for: %1$s</string>
+    <string name="received_message_label">Message</string>
+    <string name="received_message_format">Received via broadcast: %1$s</string>
+    <string name="received_waiting">Waiting for the broadcast…</string>
+    <string name="received_time_format">Received at %1$s · broadcast #%2$d</string>
+    <string name="toast_broadcast_received">Broadcast received: %1$s</string>
+    <string name="broadcast_again">Broadcast again</string>
+    <string name="custom_receiver_explanation">Activity 2 passed your text to this screen in an Intent extra. This screen registered CustomMessageReceiver first and only then sent the broadcast, so the receiver cannot miss it.</string>
+    <string name="battery_done_heading">Nothing further to do</string>
+    <string name="battery_done_message">You chose the system battery notification receiver. Its broadcast was already received on the previous screen, so this screen registers no custom receiver and does nothing else.</string>
+
+    <!-- B. Image Scale -->
+    <string name="image_content_description">A deep blue fjord between rocky mountains, seen from a cliff top</string>
+    <string name="zoom_level_format">%1$.1fx</string>
+    <string name="zoom_hint">Pinch to zoom · double-tap to reset</string>
+    <string name="image_loading">Loading image</string>
+    <string name="image_error">Couldn\'t load the image. Check your internet connection and try again.</string>
+    <string name="retry">Retry</string>
+    <string name="image_credit">Photo: Alexey Topolyanskiy (Unsplash) via Lorem Picsum</string>
+
+    <!-- C. Video -->
+    <string name="video_title">Sintel (trailer)</string>
+    <string name="video_credit">© Blender Foundation · durian.blender.org · CC BY 3.0</string>
+    <string name="video_hint">Tap the video to show or hide the playback controls</string>
+    <string name="video_loading">Loading video</string>
+    <string name="video_error">Sorry, this video can\'t be played on this device.</string>
+    <string name="video_content_description">Sintel trailer video</string>
+
+    <!-- D. Audio -->
+    <string name="audio_track_title">Carefree</string>
+    <string name="audio_track_artist">Kevin MacLeod · incompetech.com</string>
+    <string name="audio_credit">Licensed under Creative Commons: By Attribution 4.0</string>
+    <string name="audio_play">Play</string>
+    <string name="audio_pause">Pause</string>
+    <string name="audio_stop">Stop</string>
+    <string name="audio_seek_content_description">Playback position</string>
+    <string name="audio_error">The audio file could not be played.</string>
+
+    <!-- About -->
+    <string name="about_tagline">Fragments, a navigation drawer, broadcast receivers, gestures and media playback</string>
+    <string name="about_student_heading">Student information</string>
+    <string name="about_label_name">Name</string>
+    <string name="about_label_id">Student ID</string>
+    <string name="about_label_university">University</string>
+    <string name="about_label_course">Course</string>
+    <string name="about_label_assignment">Assignment</string>
+    <string name="about_credits_heading">Media credits</string>
+    <string name="about_credit_video">Video: Sintel trailer © Blender Foundation (durian.blender.org), CC BY 3.0</string>
+    <string name="about_credit_audio">Audio: “Carefree” by Kevin MacLeod (incompetech.com), CC BY 4.0</string>
+    <string name="about_credit_image">Image: photo by Alexey Topolyanskiy on Unsplash, served by Lorem Picsum</string>
 </resources>
