@@ -5,20 +5,26 @@ import androidx.annotation.IdRes
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.Root
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.DrawerActions
 import androidx.test.espresso.contrib.DrawerMatchers.isClosed
 import androidx.test.espresso.contrib.NavigationViewActions
 import androidx.test.espresso.matcher.RootMatchers.withDecorView
+import androidx.test.espresso.matcher.ViewMatchers.Visibility
 import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
+import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.android.material.navigation.NavigationView
 import org.hamcrest.Matcher
+import org.hamcrest.Matchers.allOf
+import org.hamcrest.Matchers.containsString
 import org.hamcrest.Matchers.sameInstance
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -54,10 +60,26 @@ class DrawerNavigationTest {
     }
 
     @Test
-    fun drawerHeaderShowsTheStudentDetails() {
+    fun drawerHeaderShowsBrandingButNoPersonalDetails() {
         openDrawer()
-        onView(withText("Arafat Haque Biswas")).inRoot(mainWindow).check(matches(isDisplayed()))
-        onView(withText("ID: 24241325")).inRoot(mainWindow).check(matches(isDisplayed()))
+        onView(withId(R.id.nav_header_logo)).inRoot(mainWindow).check(matches(isDisplayed()))
+        onView(withId(R.id.nav_header_app_name)).inRoot(mainWindow).check(matches(withText(R.string.app_name)))
+        onView(withId(R.id.nav_header_tagline)).inRoot(mainWindow).check(matches(withText(R.string.footer_watermark)))
+        // The assignment doesn't ask for the student's details inside the app.
+        onView(withText(containsString("24241325"))).inRoot(mainWindow).check(doesNotExist())
+        onView(withText(containsString("BRAC"))).inRoot(mainWindow).check(doesNotExist())
+    }
+
+    @Test
+    fun drawerHeaderOpensAboutWithThePrivacyPolicy() {
+        openDrawer()
+        onView(withId(R.id.nav_header)).inRoot(mainWindow).perform(click())
+
+        assertToolbarTitle("About")
+        onView(withText("Version ${BuildConfig.VERSION_NAME}")).inRoot(mainWindow).check(matches(isDisplayed()))
+        onView(withText(R.string.about_privacy_heading)).inRoot(mainWindow)
+            .check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+        onView(withText(containsString("24241325"))).inRoot(mainWindow).check(doesNotExist())
     }
 
     @Test
@@ -107,7 +129,9 @@ class DrawerNavigationTest {
             .inRoot(mainWindow)
             .check(matches(isDisplayed()))
         onView(withId(viewOnThatScreen)).inRoot(mainWindow).check(matches(isDisplayed()))
-        onView(withText(R.string.footer_watermark)).inRoot(mainWindow).check(matches(isDisplayed()))
+        // Matched by ID: the drawer header also says "Developed by AB IT".
+        onView(withId(R.id.footer_watermark_text)).inRoot(mainWindow)
+            .check(matches(allOf(isDisplayed(), withText(R.string.footer_watermark))))
         activityRule.scenario.onActivity { activity ->
             val highlighted = activity.findViewById<NavigationView>(R.id.nav_view).checkedItem
             assertEquals(title, highlighted?.title.toString())

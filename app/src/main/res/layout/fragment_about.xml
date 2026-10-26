@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- About: AB IT branding, student information and media credits -->
+<!-- About: AB IT branding, app version, the in-app privacy policy and the credits -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -60,7 +60,18 @@
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?attr/colorOnSurfaceVariant" />
 
+                <!-- Filled in by AboutFragment, e.g. "Version 1.0" -->
+                <TextView
+                    android:id="@+id/about_version_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:textAppearance="?attr/textAppearanceBodySmall"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    tools:text="Version 1.0" />
+
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/about_privacy_card"
                     style="@style/Widget.ABITMultimedia.Card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -74,80 +85,51 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/about_student_heading"
+                            android:text="@string/about_privacy_heading"
                             android:textAppearance="@style/TextAppearance.ABITMultimedia.CardLabel" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_m"
-                            android:text="@string/about_label_name"
-                            android:textAppearance="?attr/textAppearanceLabelMedium"
-                            android:textColor="?attr/colorOnSurfaceVariant" />
-
-                        <TextView
-                            android:id="@+id/about_student_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/student_name"
-                            android:textAppearance="?attr/textAppearanceBodyLarge" />
+                            android:layout_marginTop="@dimen/space_s"
+                            android:text="@string/about_privacy_summary"
+                            android:textAppearance="?attr/textAppearanceBodyMedium" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_s"
-                            android:text="@string/about_label_id"
-                            android:textAppearance="?attr/textAppearanceLabelMedium"
-                            android:textColor="?attr/colorOnSurfaceVariant" />
-
-                        <TextView
-                            android:id="@+id/about_student_id"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/student_id"
-                            android:textAppearance="?attr/textAppearanceBodyLarge" />
+                            android:text="@string/about_privacy_on_device"
+                            android:textAppearance="?attr/textAppearanceBodyMedium" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_s"
-                            android:text="@string/about_label_university"
-                            android:textAppearance="?attr/textAppearanceLabelMedium"
-                            android:textColor="?attr/colorOnSurfaceVariant" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/university_name"
-                            android:textAppearance="?attr/textAppearanceBodyLarge" />
+                            android:text="@string/about_privacy_network"
+                            android:textAppearance="?attr/textAppearanceBodyMedium" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_s"
-                            android:text="@string/about_label_course"
-                            android:textAppearance="?attr/textAppearanceLabelMedium"
-                            android:textColor="?attr/colorOnSurfaceVariant" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/course_name"
-                            android:textAppearance="?attr/textAppearanceBodyLarge" />
+                            android:text="@string/about_privacy_storage"
+                            android:textAppearance="?attr/textAppearanceBodyMedium" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_s"
-                            android:text="@string/about_label_assignment"
-                            android:textAppearance="?attr/textAppearanceLabelMedium"
-                            android:textColor="?attr/colorOnSurfaceVariant" />
+                            android:text="@string/about_privacy_contact"
+                            android:textAppearance="?attr/textAppearanceBodyMedium" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/assignment_name"
-                            android:textAppearance="?attr/textAppearanceBodyLarge" />
+                            android:layout_marginTop="@dimen/space_s"
+                            android:text="@string/about_privacy_updated"
+                            android:textAppearance="?attr/textAppearanceBodySmall"
+                            android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -188,6 +170,14 @@
                             android:layout_marginTop="@dimen/space_s"
                             android:text="@string/about_credit_image"
                             android:textAppearance="?attr/textAppearanceBodyMedium" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_s"
+                            android:text="@string/about_credit_android_robot"
+                            android:textAppearance="?attr/textAppearanceBodySmall"
+                            android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>

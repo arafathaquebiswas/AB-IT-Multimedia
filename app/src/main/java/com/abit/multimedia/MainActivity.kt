@@ -104,8 +104,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpDrawerHeader() {
         val header = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
-        header.navHeaderStudentId.text =
-            getString(R.string.student_id_format, getString(R.string.student_id))
         // The header is drawn behind the status bar, so move its content below it.
         header.root.applySystemBarInsetsAsPadding(applyTop = true)
         header.root.setOnClickListener {

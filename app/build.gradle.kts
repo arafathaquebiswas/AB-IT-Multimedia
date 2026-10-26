@@ -1,5 +1,19 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
+}
+
+// Release builds are signed with an *upload key* that is kept OUTSIDE this project folder, so the
+// key and its passwords can never be committed to git or end up in a ZIP of the project.
+// The properties file holds storeFile, storePassword, keyAlias and keyPassword. It defaults to
+// ~/.android-keystores/ab-it-multimedia/keystore.properties; another file can be passed with
+// -Pabit.signing.properties=/path/to/keystore.properties. Without it, release builds are unsigned.
+val signingPropertiesFile: File = providers.gradleProperty("abit.signing.properties")
+    .map { File(it) }
+    .getOrElse(File(System.getProperty("user.home"), ".android-keystores/ab-it-multimedia/keystore.properties"))
+val signingProperties = Properties().apply {
+    if (signingPropertiesFile.isFile) signingPropertiesFile.inputStream().use { load(it) }
 }
 
 android {
@@ -18,8 +32,21 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        if (signingProperties.isNotEmpty()) {
+            create("upload") {
+                storeFile = File(signingProperties.getProperty("storeFile"))
+                storePassword = signingProperties.getProperty("storePassword")
+                keyAlias = signingProperties.getProperty("keyAlias")
+                keyPassword = signingProperties.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            // null (unsigned) when the upload key's properties file is missing
+            signingConfig = signingConfigs.findByName("upload")
             optimization {
                 enable = true
                 packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
@@ -33,6 +60,8 @@ android {
     buildFeatures {
         // Generates a type-safe binding class for every XML layout (e.g. FragmentAudioBinding).
         viewBinding = true
+        // BuildConfig.VERSION_NAME is shown on the About screen.
+        buildConfig = true
     }
 }
 

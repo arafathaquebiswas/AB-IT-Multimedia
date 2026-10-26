@@ -1,16 +1,9 @@
 <resources>
     <string name="app_name">AB IT Multimedia</string>
 
-    <!-- Branding and student information -->
+    <!-- Branding -->
     <string name="footer_watermark">Developed by AB IT</string>
     <string name="logo_content_description">AB IT logo</string>
-    <string name="student_name">Arafat Haque Biswas</string>
-    <string name="student_id">24241325</string>
-    <string name="student_id_format">ID: %1$s</string>
-    <string name="university_name">BRAC University</string>
-    <string name="course_name">CSE 489 — Mobile Application Development</string>
-    <string name="assignment_name">Assignment 2</string>
-    <string name="nav_header_course_line">CSE 489 · Assignment 2 · BRAC University</string>
     <string name="nav_header_open_about">Open the About screen</string>
 
     <!-- Navigation drawer: the four main features, in the required order -->
@@ -104,14 +97,21 @@
 
     <!-- About -->
     <string name="about_tagline">Fragments, a navigation drawer, broadcast receivers, gestures and media playback</string>
-    <string name="about_student_heading">Student information</string>
-    <string name="about_label_name">Name</string>
-    <string name="about_label_id">Student ID</string>
-    <string name="about_label_university">University</string>
-    <string name="about_label_course">Course</string>
-    <string name="about_label_assignment">Assignment</string>
-    <string name="about_credits_heading">Media credits</string>
+    <string name="about_version_format">Version %1$s</string>
+
+    <!-- Privacy policy (Google Play requires it inside the app too). Keep in sync with PRIVACY_POLICY.md -->
+    <string name="about_privacy_heading">Privacy policy</string>
+    <string name="about_privacy_summary">AB IT Multimedia does not collect, store or share any personal data. It has no accounts, ads, analytics or tracking, and the only permission it uses is internet access.</string>
+    <string name="about_privacy_on_device">The message you type for the custom broadcast is only passed between the app\'s own screens, and the battery level is only read to show it on screen. Neither ever leaves your device.</string>
+    <string name="about_privacy_network">The only time the app connects to the internet is when Image Scale downloads a photo from picsum.photos over an encrypted (HTTPS) connection. Like any website, that server receives your device\'s IP address with the request. The app sends it nothing else.</string>
+    <string name="about_privacy_storage">The video and the music are stored inside the app. A copy of the downloaded photo is kept in the app\'s cache on your device and is deleted when you clear the app\'s storage or uninstall it.</string>
+    <string name="about_privacy_contact">Questions about privacy: contact AB IT through the developer email address on the app\'s Google Play page.</string>
+    <string name="about_privacy_updated">Last updated: 26 October 2026</string>
+
+    <string name="about_credits_heading">Credits</string>
     <string name="about_credit_video">Video: Sintel trailer © Blender Foundation (durian.blender.org), CC BY 3.0</string>
     <string name="about_credit_audio">Audio: “Carefree” by Kevin MacLeod (incompetech.com), CC BY 4.0</string>
     <string name="about_credit_image">Image: photo by Alexey Topolyanskiy on Unsplash, served by Lorem Picsum</string>
+    <!-- Exact attribution text required by Google's Android brand guidelines (the logo contains the robot) -->
+    <string name="about_credit_android_robot">The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the Creative Commons 3.0 Attribution License.</string>
 </resources>
