@@ -10,6 +10,8 @@
     <dimen name="screen_padding">24dp</dimen>
     <!-- Keeps forms and cards readable on tablets and in landscape -->
     <dimen name="content_max_width">560dp</dimen>
+    <!-- Wider limit for side-by-side landscape layouts -->
+    <dimen name="content_max_width_wide">720dp</dimen>
 
     <!-- Accessibility: minimum size of anything the user can touch -->
     <dimen name="touch_target_min">48dp</dimen>
@@ -34,6 +36,8 @@
     <!-- Audio player -->
     <dimen name="audio_artwork_size">160dp</dimen>
     <dimen name="audio_artwork_icon_size">88dp</dimen>
+    <dimen name="audio_artwork_size_compact">120dp</dimen>
+    <dimen name="audio_artwork_icon_size_compact">64dp</dimen>
     <dimen name="audio_play_button_size">72dp</dimen>
     <dimen name="audio_play_icon_size">36dp</dimen>
     <dimen name="audio_stop_button_size">56dp</dimen>
