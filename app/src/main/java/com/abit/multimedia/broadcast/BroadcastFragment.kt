@@ -19,12 +19,21 @@ class BroadcastFragment : Fragment(R.layout.fragment_broadcast) {
     // Only valid between onViewCreated() and onDestroyView().
     private val binding get() = _binding!!
 
+    // True while Activity 2 is being opened, so a quick double tap can't open it twice.
+    // Reset when this screen is shown again.
+    private var isOpeningActivity2 = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentBroadcastBinding.bind(view)
 
         setUpSpinner()
         binding.proceedButton.setOnClickListener { openActivity2() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isOpeningActivity2 = false
     }
 
     override fun onDestroyView() {
@@ -60,6 +69,8 @@ class BroadcastFragment : Fragment(R.layout.fragment_broadcast) {
     private fun openActivity2() {
         val position = binding.broadcastTypeSpinner.selectedItemPosition
         val mode = BroadcastMode.fromSpinnerPosition(position) ?: return
+        if (isOpeningActivity2) return
+        isOpeningActivity2 = true
         // Explicit Intent: it names the exact Activity class to start.
         startActivity(BroadcastInputActivity.newIntent(requireContext(), mode))
     }

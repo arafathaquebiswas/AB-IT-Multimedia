@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -34,6 +35,10 @@ class BroadcastInputActivity : AppCompatActivity() {
 
     private val timeFormat = DateFormat.getTimeInstance(DateFormat.MEDIUM)
 
+    // True while Activity 3 is being opened. A double tap, or a keyboard that reports "Send"
+    // twice, would otherwise open Activity 3 twice. Reset when this screen is shown again.
+    private var isOpeningActivity3 = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -56,6 +61,17 @@ class BroadcastInputActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        isOpeningActivity3 = false
+    }
+
+    private fun openActivity3(intent: Intent) {
+        if (isOpeningActivity3) return
+        isOpeningActivity3 = true
+        startActivity(intent)
+    }
+
     // ---- Option 1: custom broadcast receiver -------------------------------------------------
 
     private fun showCustomMessageForm() {
@@ -64,13 +80,19 @@ class BroadcastInputActivity : AppCompatActivity() {
         form.root.isVisible = true
 
         form.messageEditText.doAfterTextChanged { form.messageInputLayout.error = null }
-        // The keyboard's Send key does the same as the button.
-        form.messageEditText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEND) {
-                openActivity3WithMessage()
-                true
-            } else {
-                false
+        // The on-screen keyboard's Send key (IME_ACTION_SEND) and the Enter key of a hardware
+        // keyboard (IME_NULL, reported for key-down and key-up) do the same as the button.
+        form.messageEditText.setOnEditorActionListener { _, actionId, event ->
+            when {
+                actionId == EditorInfo.IME_ACTION_SEND -> {
+                    openActivity3WithMessage()
+                    true
+                }
+                actionId == EditorInfo.IME_NULL && event?.keyCode == KeyEvent.KEYCODE_ENTER -> {
+                    if (event.action == KeyEvent.ACTION_DOWN) openActivity3WithMessage()
+                    true
+                }
+                else -> false
             }
         }
         form.sendButton.setOnClickListener { openActivity3WithMessage() }
@@ -85,7 +107,7 @@ class BroadcastInputActivity : AppCompatActivity() {
         }
         // Pass the text to Activity 3 in an Intent extra. Activity 3 broadcasts it only after
         // registering its receiver (CustomReceiverActivity explains why).
-        startActivity(CustomReceiverActivity.newIntent(this, BroadcastMode.CUSTOM, message))
+        openActivity3(CustomReceiverActivity.newIntent(this, BroadcastMode.CUSTOM, message))
     }
 
     // ---- Option 2: system battery notification receiver --------------------------------------
@@ -97,7 +119,7 @@ class BroadcastInputActivity : AppCompatActivity() {
         // registered while this screen is visible, and is unregistered when it stops.
         batteryViewModel.batteryStatus.observe(this) { status -> showBattery(status) }
         binding.batteryStatus.nextButton.setOnClickListener {
-            startActivity(CustomReceiverActivity.newIntent(this, BroadcastMode.BATTERY))
+            openActivity3(CustomReceiverActivity.newIntent(this, BroadcastMode.BATTERY))
         }
     }
 
