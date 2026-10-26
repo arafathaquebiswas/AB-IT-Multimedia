@@ -1,5 +1,6 @@
 package com.abit.multimedia.video
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -41,11 +42,23 @@ class VideoFragment : Fragment(R.layout.fragment_video) {
 
     /**
      * The MediaController floats in its own window above the app, so it would stay on top of the
-     * navigation drawer. Hide it as soon as the drawer starts to slide open.
+     * navigation drawer. Hide it while the drawer opens, and bring it back when the drawer closes
+     * over a paused video.
      */
     private val hideControlsWhenDrawerMoves = object : DrawerLayout.SimpleDrawerListener() {
+        private var lastSlideOffset = 0f
+
         override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-            mediaController?.hide()
+            // Only while opening: the drawer also slides closed right after a drawer item is
+            // picked, which must not hide the controls of the screen being opened.
+            if (slideOffset > lastSlideOffset) mediaController?.hide()
+            lastSlideOffset = slideOffset
+        }
+
+        override fun onDrawerClosed(drawerView: View) {
+            lastSlideOffset = 0f
+            val videoView = _binding?.videoView ?: return
+            if (isPrepared && !videoView.isPlaying) mediaController?.show()
         }
     }
 
@@ -59,7 +72,7 @@ class VideoFragment : Fragment(R.layout.fragment_video) {
         // or hides it when the video is tapped.
         binding.videoView.setMediaController(controller)
         binding.videoView.onBeforeStart = { PlaybackCoordinator.onPlaybackStarted(playbackOwner) }
-        binding.videoView.setOnPreparedListener { onVideoPrepared() }
+        binding.videoView.setOnPreparedListener { player -> onVideoPrepared(player) }
         binding.videoView.setOnErrorListener { _, what, extra -> onVideoError(what, extra) }
         binding.videoView.setOnCompletionListener { onVideoCompleted() }
         binding.videoRetryButton.setOnClickListener { openVideo() }
@@ -72,16 +85,18 @@ class VideoFragment : Fragment(R.layout.fragment_video) {
         openVideo()
     }
 
+    override fun onPause() {
+        super.onPause()
+        // Save already here: when the app goes to the background, the video's surface can be
+        // destroyed (and VideoView releases its player) before onStop() runs.
+        rememberPlaybackState()
+    }
+
     override fun onStop() {
         super.onStop()
-        val videoView = binding.videoView
-        if (isPrepared) {
-            viewModel.positionMs = videoView.currentPosition
-            // Keep playing after a rotation, but not after the user left the screen or the app.
-            viewModel.playWhenReady = videoView.isPlaying && requireActivity().isChangingConfigurations
-        }
+        rememberPlaybackState()
         // Never keep playing behind another screen or while the app is in the background.
-        videoView.pause()
+        binding.videoView.pause()
         PlaybackCoordinator.onPlaybackStopped(playbackOwner)
     }
 
@@ -93,8 +108,20 @@ class VideoFragment : Fragment(R.layout.fragment_video) {
         mediaController = null
         binding.videoView.onBeforeStart = null
         binding.videoView.stopPlayback() // releases the MediaPlayer inside the VideoView
+        isPrepared = false
         PlaybackCoordinator.onPlaybackStopped(playbackOwner)
         _binding = null
+    }
+
+    private fun rememberPlaybackState() {
+        val videoView = _binding?.videoView ?: return
+        // getDuration() is -1 once VideoView has released its player; the position would then
+        // wrongly read 0, so keep the value saved earlier.
+        if (!isPrepared || videoView.duration <= 0) return
+        viewModel.positionMs = videoView.currentPosition
+        // Keep playing after a rotation, but not after the user left the screen or the app.
+        viewModel.playWhenReady = videoView.isPlaying && requireActivity().isChangingConfigurations
+        Log.d(TAG, "Saved position ${viewModel.positionMs} ms (resume playing: ${viewModel.playWhenReady})")
     }
 
     private fun openVideo() {
@@ -106,18 +133,21 @@ class VideoFragment : Fragment(R.layout.fragment_video) {
         binding.videoView.setVideoURI(videoUri)
     }
 
-    private fun onVideoPrepared() {
+    private fun onVideoPrepared(player: MediaPlayer) {
         val binding = _binding ?: return
         isPrepared = true
         binding.videoLoadingIndicator.isVisible = false
+        // While paused, show the controls so the user sees the Play button. Seeking is
+        // asynchronous, so show them once the seek is done; then they show the right time.
+        // show() hides them again after 3 seconds: while visible, MediaController's window takes
+        // every touch, so leaving it up would block the toolbar and the drawer.
+        player.setOnSeekCompleteListener {
+            val videoView = _binding?.videoView ?: return@setOnSeekCompleteListener
+            if (!videoView.isPlaying) mediaController?.show()
+        }
         // Continue where the user left off (0 the first time).
         binding.videoView.seekTo(viewModel.positionMs)
-        if (viewModel.playWhenReady) {
-            binding.videoView.start()
-        } else {
-            // Paused: keep the controls on screen so the Play button is visible.
-            mediaController?.show(0)
-        }
+        if (viewModel.playWhenReady) binding.videoView.start()
     }
 
     private fun onVideoError(what: Int, extra: Int): Boolean {
@@ -137,7 +167,7 @@ class VideoFragment : Fragment(R.layout.fragment_video) {
         viewModel.positionMs = 0
         viewModel.playWhenReady = false
         PlaybackCoordinator.onPlaybackStopped(playbackOwner)
-        mediaController?.show(0)
+        mediaController?.show()
     }
 
     // The drawer belongs to MainActivity; null if this Fragment is ever hosted elsewhere.
