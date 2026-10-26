@@ -11,8 +11,8 @@ constraintlayout = "2.2.2"
 fragment = "1.9.1"
 lifecycle = "2.11.0"
 navigation = "2.10.2"
-# Coil 3.3.0 is the newest release built with Kotlin 2.2. Later releases are built with
-# Kotlin 2.4, which the Kotlin 2.2 compiler bundled with AGP 9.4.1 cannot read.
+# Coil 3.3.0 is the newest release built with Kotlin 2.2, the Kotlin version built into
+# AGP 9.4.1. Coil 3.4 uses Kotlin 2.3 and 3.5+ uses Kotlin 2.4, which Kotlin 2.2 cannot read.
 coil = "3.3.0"
 
 [libraries]

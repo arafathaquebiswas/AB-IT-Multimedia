@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# The assignment brief is not part of the app's source
+CSE 489 Assig*.pdf
+CSE489*.pdf
