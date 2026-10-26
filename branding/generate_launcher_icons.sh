@@ -9,6 +9,7 @@
 #
 # What it produces
 #   mipmap-*/ic_launcher_foreground.webp  adaptive icon foreground (API 26+)
+#   mipmap-*/ic_launcher_monochrome.webp  single-colour layer for themed icons (API 33+)
 #   mipmap-*/ic_launcher.webp             legacy square icon (API 24-25)
 #   mipmap-*/ic_launcher_round.webp       legacy round icon (API 24-25)
 #   drawable-nodpi/ab_it_logo.webp        logo shown inside the app
@@ -53,6 +54,25 @@ OFFSET_Y=$(( CANVAS_PX / 2 - CENTER_Y ))
 magick -size "${CANVAS_PX}x${CANVAS_PX}" xc:none "$WORK/logo_masked.png" \
     -geometry "+${OFFSET_X}+${OFFSET_Y}" -compose Over -composite "$WORK/foreground_full.png"
 
+# 2b. Monochrome layer for themed icons (Android 13+): the logo's white artwork plus the cyan
+#     "IT" as one single-colour silhouette, placed on the same canvas as the foreground.
+magick "$SRC" -colorspace Gray -threshold 80% "$WORK/mono_white.png"
+magick "$SRC" -channel B -separate -threshold 70% "$WORK/mono_b.png"
+magick "$SRC" -channel G -separate -threshold 45% "$WORK/mono_g.png"
+magick "$SRC" -channel R -separate -threshold 30% -negate "$WORK/mono_r.png"
+#     Only look for the cyan "IT" in the text band, so the blue ring and tiles are left out.
+magick -size 1254x1254 xc:black -fill white -draw "rectangle 0,880 1253,1090" "$WORK/mono_text_band.png"
+magick "$WORK/mono_b.png" "$WORK/mono_g.png" -compose Multiply -composite \
+    "$WORK/mono_r.png" -compose Multiply -composite \
+    "$WORK/mono_text_band.png" -compose Multiply -composite "$WORK/mono_cyan.png"
+magick "$WORK/logo_masked.png" -alpha extract -morphology Erode Disk:12 "$WORK/mono_inside.png"
+magick "$WORK/mono_white.png" "$WORK/mono_cyan.png" -compose Lighten -composite \
+    "$WORK/mono_inside.png" -compose Multiply -composite -morphology Open Disk:1 "$WORK/mono_mask.png"
+magick -size 1254x1254 xc:white "$WORK/mono_mask.png" -alpha off -compose CopyOpacity -composite \
+    "$WORK/mono_logo.png"
+magick -size "${CANVAS_PX}x${CANVAS_PX}" xc:none "$WORK/mono_logo.png" \
+    -geometry "+${OFFSET_X}+${OFFSET_Y}" -compose Over -composite "$WORK/monochrome_full.png"
+
 # 3. Background raster (only used to render the legacy round + Play Store icons).
 #    Same gradient as drawable/ic_launcher_background.xml: centre (31.5dp, 25.6dp), radius 54dp.
 BG_CX=$(( CANVAS_PX * 315 / 1080 ))
@@ -87,6 +107,7 @@ for spec in mdpi:48:108 hdpi:72:162 xhdpi:96:216 xxhdpi:144:324 xxxhdpi:192:432;
     dir="$RES/mipmap-$density"
     mkdir -p "$dir"
     webp "$WORK/foreground_full.png" "$adaptive" "$dir/ic_launcher_foreground.webp"
+    webp "$WORK/monochrome_full.png" "$adaptive" "$dir/ic_launcher_monochrome.webp"
     # Legacy icons keep a 2 dp transparent margin like the platform templates.
     inner=$(( legacy * 44 / 48 ))
     for kind in square:ic_launcher round:ic_launcher_round; do

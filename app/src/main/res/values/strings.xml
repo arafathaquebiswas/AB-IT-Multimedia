@@ -3,7 +3,6 @@
 
     <!-- Branding and student information -->
     <string name="footer_watermark">Developed by AB IT</string>
-    <string name="brand_name">AB IT</string>
     <string name="logo_content_description">AB IT logo</string>
     <string name="student_name">Arafat Haque Biswas</string>
     <string name="student_id">24241325</string>
@@ -24,7 +23,6 @@
 
     <!-- A. Broadcast Receiver: selection screen -->
     <string name="broadcast_select_title">Select a broadcast type</string>
-    <string name="broadcast_spinner_content_description">Broadcast type</string>
     <string-array name="broadcast_types">
         <item>Custom broadcast receiver</item>
         <item>System battery notification receiver</item>
@@ -85,7 +83,6 @@
     <string name="image_loading">Loading image</string>
     <string name="image_error">Couldn\'t load the image. Check your internet connection and try again.</string>
     <string name="retry">Retry</string>
-    <string name="image_credit">Photo: Alexey Topolyanskiy (Unsplash) via Lorem Picsum</string>
 
     <!-- C. Video -->
     <string name="video_title">Sintel (trailer)</string>

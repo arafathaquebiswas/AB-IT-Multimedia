@@ -5,7 +5,6 @@
     <dimen name="space_s">8dp</dimen>
     <dimen name="space_m">16dp</dimen>
     <dimen name="space_l">24dp</dimen>
-    <dimen name="space_xl">32dp</dimen>
 
     <!-- Padding around the content of every screen -->
     <dimen name="screen_padding">24dp</dimen>
@@ -27,7 +26,6 @@
     <dimen name="spinner_min_width">280dp</dimen>
     <dimen name="battery_progress_thickness">12dp</dimen>
     <dimen name="battery_progress_corner_radius">6dp</dimen>
-    <dimen name="status_icon_size">20dp</dimen>
 
     <!-- Image Scale -->
     <dimen name="zoom_badge_corner_radius">16dp</dimen>

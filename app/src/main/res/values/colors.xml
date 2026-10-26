@@ -3,7 +3,6 @@
     <!-- AB IT brand colours, sampled from branding/ab_it_multimedia_app_icon.png -->
     <color name="brand_navy">#FF021C4A</color>
     <color name="brand_navy_light">#FF02377E</color>
-    <color name="brand_cyan">#FF1ABCFD</color>
 
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
