@@ -47,12 +47,17 @@ android {
         release {
             // null (unsigned) when the upload key's properties file is missing
             signingConfig = signingConfigs.findByName("upload")
+            // R8 shrinks and optimizes the whole app. (The template also limited optimization to
+            // packageScope = androidx/kotlin/kotlinx; that produced an IllegalAccessError crash in
+            // the release build when sending a custom broadcast message, so it was removed.)
             optimization {
                 enable = true
-                packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
             }
         }
     }
+    // Espresso runs against the debug build by default. Run them against the R8-optimized
+    // release build with: ./gradlew connectedReleaseAndroidTest -PtestBuildType=release
+    testBuildType = providers.gradleProperty("testBuildType").getOrElse("debug")
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
