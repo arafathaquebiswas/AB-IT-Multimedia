@@ -1,0 +1,811 @@
+============================================================
+           AI USAGE DECLARATION
+============================================================
+
+Name:       Arafat Haque Biswas
+Student ID: 24241325
+Assignment: 2
+Date:       28 Oct 2026
+
+------------------------------------------------------------
+1. AI TOOLS USED (check all that apply)
+------------------------------------------------------------
+[ ] None
+[ ] ChatGPT
+[x] GitHub Copilot   (in VS Code, for the commit "Update multimedia app")
+[ ] Google Gemini
+[x] Claude           (Claude Code in VS Code, model Claude Opus 5.5)
+[ ] Cursor
+[ ] Other: ________________
+
+------------------------------------------------------------
+2. PURPOSE OF AI USE (check all that apply)
+------------------------------------------------------------
+[x] Learning/understanding concepts
+[x] Debugging my code
+[x] Generating code snippets
+[x] Writing text content
+[x] Design/styling ideas
+[ ] Image generation
+[x] Other: making launcher icons and Play Store graphics from my
+           own AB IT logo (scripted image processing, not AI image
+           generation); building, testing and preparing a Google
+           Play release
+
+------------------------------------------------------------
+3. DESCRIPTION OF AI USE
+------------------------------------------------------------
+Briefly describe what you used AI for and how:
+
+I gave Claude (Claude Code, an AI coding agent running in VS Code
+on my Mac) the assignment PDF and a detailed written specification.
+All of my prompts are copied word for word right after this
+section.
+
+Working directly in my project folder, Claude:
+- created the Android Studio project and wrote the Kotlin code, XML
+  layouts and resources for the navigation drawer and the four
+  features: Broadcast Receiver (three Activities, custom and system
+  battery broadcasts), Image Scale (pinch-to-zoom), Video and Audio;
+- found the sample video and music, checked their licences and
+  added the credits;
+- turned my AB IT logo into the app's launcher icons with a script;
+- wrote unit tests and Espresso tests, ran the builds, tests and
+  lint, tested the app on an Android emulator and fixed the bugs it
+  found (for example Activity 3 opening twice, the video position
+  being lost, and a crash in the release build);
+- wrote README.md, PROJECT_GUIDE.md (explanations for my viva), the
+  privacy policy and the Google Play preparation notes, and set up
+  release signing.
+
+I provided the requirements, my AB IT logo and the branding,
+decided which personal details may appear in the app, and committed
+and pushed the work to GitHub myself. GitHub Copilot in VS Code was
+used for my commit "Update multimedia app" (26 Oct 2026).
+
+------------------------------------------------------------
+MY PROMPTS TO THE AI (part of section 3, copied word for word)
+------------------------------------------------------------
+
+--- Prompt 1 (25 Oct 2026) ---
+
+hello
+
+--- Prompt 2 (25 Oct 2026, with the assignment PDF
+    "CSE 489 Assigment L2 v5 (1).pdf" attached) ---
+
+# CSE 489 Assignment 2 — Build the Complete Android App
+
+You are working inside the root directory of a fresh Android Studio project created from the Empty Views Activity template using Kotlin and Kotlin DSL. Build the complete CSE 489 Mobile Application Development Assignment 2 app for BRAC University. The project must build, run, and be ready to submit and demonstrate.
+
+Read the entire attached assignment PDF and this complete prompt before starting. Follow the PDF for the academic requirements and this prompt for the detailed implementation.
+
+Work autonomously. Inspect the existing project, make sensible decisions, implement every feature, test what you can, fix errors, and document the results. Do not stop at an architecture proposal or tutorial. I must be able to explain the code during my viva, so keep it clean, beginner-friendly, and well commented.
+
+## 1. Student information
+
+Use these exact details:
+
+- Student name: Arafat Haque Biswas
+- Student ID: 24241325
+- University: BRAC University
+- Course: CSE 489 — Mobile Application Development
+- Assignment: Assignment 2
+- App and developer branding: AB IT
+
+Show my name and ID in the Navigation Drawer header and README.md. Include them in the About or Student Information screen if appropriate. Do not leave placeholders for my details.
+
+## 2. Mandatory AB IT branding and watermark
+
+The app must use my own branding rather than generic template branding.
+
+### Custom application icon and logo
+
+I have a logo image named:
+
+AB IT Multimedia App Icon.png
+
+Look for this file in the project directory or available uploaded assets.
+
+- Use this image as the actual Android launcher icon.
+- Do not leave the default Android Studio launcher icon.
+- If the image is not already in the project, check the available files and asset locations before concluding it is missing.
+- If the image needs renaming for easier resource management, use a sensible filename such as `ab_it_multimedia_app_icon.png`.
+- Generate the required Android launcher icon assets from my supplied logo using Android Studio's Image Asset workflow or an equivalent reproducible method.
+- Support modern adaptive icons and provide appropriate legacy launcher icons.
+- Preserve the original logo's design and proportions. Do not replace it with a generic AI-generated logo.
+- Use a suitable background for the adaptive icon without distorting or cropping important logo content.
+- Display my AB IT logo in the app's home screen or About section where appropriate, using the supplied image.
+- If the logo file is unavailable, report this clearly and leave a documented location where I can add it. Do not pretend that the original logo was integrated.
+
+### Footer watermark
+
+Every main application screen and every activity in the broadcast workflow must include a consistent footer watermark.
+
+Use the exact text:
+
+Developed by AB IT
+
+Requirements:
+- Display it subtly at the bottom of each screen.
+- Keep it readable, professional, and consistent.
+- Never let it overlap buttons, text, media controls, system bars, or important content.
+- Handle scrollable screens, different screen sizes, landscape orientation, and edge-to-edge layouts correctly.
+- Reuse a shared footer component or layout rather than duplicating inconsistent implementations.
+- Ensure the footer remains appropriate in both light and dark themes.
+- Include the branding on the Home screen and About section.
+- Do not invent a company address, website, or contact information.
+
+The footer watermark must be present on Broadcast Receiver selection, Activity 2, Activity 3, Image Scale, Video, and Audio screens.
+
+## 3. Exact technology stack
+
+Use the following stack:
+
+- Kotlin
+- XML Views
+- ViewBinding
+- Material 3 components compatible with Android Views
+- DrawerLayout
+- NavigationView
+- Navigation Component
+- Fragments
+- ViewModels
+- LiveData or lifecycle-aware StateFlow
+- Kotlin coroutines where appropriate
+- Native Android broadcast APIs
+- ScaleGestureDetector and Matrix
+- VideoView, MediaController, and MediaPlayer
+- Android resource files and a version catalog
+
+Do not use Jetpack Compose. Do not introduce unnecessary modules, Hilt, kapt/KSP, Safe Args, or complex dependencies.
+
+Keep the project's existing Android Gradle Plugin, Gradle wrapper, compileSdk, and targetSdk versions. Use minSdk 24 unless the existing project or a genuine compatibility issue requires a documented change.
+
+Add dependencies through `gradle/libs.versions.toml`, using mutually compatible stable versions.
+
+Use `strings.xml` for visible text and `dimens.xml` for layout dimensions. Avoid hard-coded strings and dimensions in XML layouts.
+
+## 4. Main screen and navigation drawer
+
+Implement the main screen using:
+
+- DrawerLayout
+- MaterialToolbar
+- NavigationView
+- NavHostFragment
+- Navigation Component
+- AppBarConfiguration
+- NavigationUI
+
+The drawer must contain exactly four main feature items, in this order and with these exact labels:
+
+1. Broadcast Receiver
+2. Image Scale
+3. Video
+4. Audio
+
+The four items must be top-level destinations in `nav_graph.xml`, with matching menu-item and destination IDs.
+
+Requirements:
+- Start on Broadcast Receiver.
+- Display the hamburger icon on every top-level destination.
+- Update the toolbar title to match the selected screen.
+- Highlight the current drawer item.
+- Ensure drawer navigation works from every feature screen.
+- Ensure the Back button closes an open drawer before navigating away.
+- Use correct back-stack behavior and avoid duplicate destinations.
+- Include my name and student ID in the drawer header.
+- Keep the footer watermark visible on all relevant screens.
+- Handle edge-to-edge system insets correctly.
+
+The About section may be accessible from the drawer header or a secondary screen, but do not add a fifth main feature item to the required four-item drawer.
+
+## 5. Feature A — Broadcast Receiver
+
+Follow the precise activity flow in the assignment PDF.
+
+### Screen 1 — Broadcast Receiver Fragment
+
+This is the Broadcast Receiver drawer destination.
+
+Display:
+- A toolbar with a hamburger icon.
+- The title `Select a broadcast type`.
+- A Spinner populated from a string-array resource.
+- A Proceed button.
+- The AB IT footer watermark.
+
+The Spinner must contain exactly these two options:
+
+1. `Custom broadcast receiver`
+2. `System battery notification receiver`
+
+Use an ArrayAdapter and preserve the selected option during rotation.
+
+When the user taps Proceed, start the appropriate real Activity using an explicit Intent.
+
+### Activity 2 — Custom broadcast input
+
+When Custom broadcast receiver is selected, open a separate Activity containing:
+
+- A Material TextInputLayout with the label `Message to broadcast`.
+- An EditText for plain-text input.
+- A `Send to receiver` button.
+- Support for the keyboard's Send action.
+- An Up arrow that calls `finish()`.
+- The AB IT footer watermark.
+
+Reject blank messages with an inline validation error.
+
+When the user submits a valid message, open Activity 3 and pass the broadcast mode and message through Intent extras.
+
+Use type-safe extra handling where supported. Do not use deprecated untyped APIs.
+
+### Activity 2 — Battery notification
+
+When System battery notification receiver is selected, use Activity 2 to show battery status instead of the text-input form.
+
+Requirements:
+- Register for `Intent.ACTION_BATTERY_CHANGED` only while the screen is visible.
+- Use a lifecycle-aware helper, such as a LiveData implementation that registers in `onActive()` and unregisters in `onInactive()`.
+- Handle the sticky broadcast's initial Intent so that a battery percentage appears immediately.
+- Calculate percentage as `EXTRA_LEVEL * 100 / EXTRA_SCALE`.
+- Guard against a scale less than or equal to zero.
+- Display a large percentage value.
+- Display a progress indicator.
+- Display charging status using `EXTRA_STATUS`.
+- Display the time of the latest update.
+- Update the UI when battery status changes.
+- Include a Next button that opens Activity 3 in battery mode.
+- Include the AB IT footer watermark.
+
+Do not request unnecessary permissions for the protected system battery broadcast.
+
+### Activity 3 — Custom message receiver
+
+Create a separate Activity named `CustomReceiverActivity` or an equally clear name.
+
+Implement a dedicated `CustomMessageReceiver` BroadcastReceiver class.
+
+Use an action and message extra derived from the application ID:
+
+- Action: `<applicationId>.action.CUSTOM_MESSAGE`
+- Extra: `<applicationId>.extra.MESSAGE`
+
+Use the actual application ID at runtime rather than leaving these strings as literal placeholders.
+
+Requirements:
+- Register the receiver inside Activity 3 using `ContextCompat.registerReceiver()` with `ContextCompat.RECEIVER_NOT_EXPORTED`.
+- Unregister it in the appropriate lifecycle callback.
+- Do not declare this custom receiver in AndroidManifest.xml.
+- Receive the message through the broadcast Intent.
+- Display `Received via broadcast: <text>`.
+- Show the time of reception.
+- Show a Toast and write a useful Logcat entry.
+- Display whether the receiver is registered and show the action it listens for.
+- Include a `Broadcast again` button.
+- Prevent automatic duplicate broadcasts when the device rotates.
+- Preserve the received message across rotation using ViewModel or saved state.
+- Include the AB IT footer watermark.
+
+Important implementation detail: Activity 2 passes the message to Activity 3 through an Intent extra. Activity 3 registers its receiver before sending the custom broadcast. Activity 3 then sends an explicit, package-restricted broadcast using the correct custom action and message extra.
+
+Explain in code comments and PROJECT_GUIDE.md why the broadcast is sent from Activity 3: if Activity 2 sends it before Activity 3 registers its receiver, the message may be missed.
+
+Do not merely display the original Intent extra as though a broadcast was received. Actually register the receiver, send the broadcast, receive it, and update the UI.
+
+Use `Intent(action).setPackage(packageName)` or another equivalent package-restricted approach.
+
+### Activity 3 — Battery mode
+
+When Activity 3 is opened in battery mode:
+
+- Do not register the custom message receiver.
+- Display a short note explaining that nothing further needs to be done for the battery option.
+- Follow the assignment's requirement that this branch does nothing.
+- Keep navigation and the footer consistent.
+
+Do not use LocalBroadcastManager or create your own sticky broadcasts. Handle registration and unregistration safely according to the Activity lifecycle.
+
+## 6. Feature B — Image Scale
+
+Create an Image Scale Fragment that loads a high-resolution image from the internet and supports genuine pinch-to-zoom.
+
+Use Coil 3 with both dependencies:
+
+- `io.coil-kt.coil3:coil`
+- `io.coil-kt.coil3:coil-network-okhttp`
+
+Keep the image URL in one named constant, initially:
+
+`https://picsum.photos/id/1015/2000/1300`
+
+Verify that it works and replace it if necessary.
+
+Add the INTERNET permission to AndroidManifest.xml.
+
+### Implement ZoomableImageView
+
+Create a custom `ZoomableImageView` using:
+
+- ScaleGestureDetector
+- Matrix
+- Touch event handling
+- A one-finger pan gesture while zoomed
+- Double-tap zoom/reset
+
+Requirements:
+- Load the original image size where feasible so zooming does not unnecessarily blur the image.
+- Fit the image correctly inside the view initially.
+- Zoom around the pinch focal point.
+- Clamp the zoom between 1x and 5x.
+- Keep the image within its boundaries while panning.
+- Allow one-finger panning when zoomed.
+- Double-tap to zoom in or reset to the original fit.
+- Recalculate the initial fit when the view size or drawable changes.
+- Handle Coil's asynchronous drawable updates correctly.
+- Avoid downloading unnecessarily huge images into memory when a suitable high-resolution image is available.
+
+Show:
+- A loading indicator.
+- The image.
+- Current zoom, for example `2.4x`.
+- The hint `Pinch to zoom · double-tap to reset`.
+- An error state with a Retry button.
+
+Do not use PhotoView or another prebuilt zoom library. The gesture implementation must be written using ScaleGestureDetector and Matrix as requested.
+
+Include the AB IT footer watermark.
+
+## 7. Feature C — Video
+
+Create a functional Video Fragment using VideoView and MediaController.
+
+Requirements:
+- Play one video inside the app.
+- Show playback controls.
+- Maintain the correct aspect ratio.
+- Show a loading indicator until the video is prepared.
+- Handle playback errors with a friendly message.
+- Return true from the error listener to suppress the system error dialog.
+- Pause and remember the playback position when the screen stops.
+- Restore playback position when the user returns.
+- Do not allow playback to continue behind another screen.
+- Hide the MediaController and call `stopPlayback()` in `onDestroyView()`.
+- Handle Activity and Fragment lifecycle changes correctly.
+- Include the AB IT footer watermark.
+
+Bundle the sample video in `app/src/main/res/raw/sample_video.mp4` if the file can be obtained and verified.
+
+## 8. Feature D — Audio
+
+Create an Audio Fragment using `android.media.MediaPlayer`.
+
+Requirements:
+- Use AudioAttributes with `USAGE_MEDIA`.
+- Manage the player through an AudioPlayerViewModel so playback state survives rotation.
+- Release MediaPlayer in `onCleared()`.
+- Provide Play/Pause, Stop, and seek controls.
+- Show the track title.
+- Show elapsed and total time in `mm:ss` format.
+- Update progress with a lifecycle-safe coroutine.
+- Reset the UI when playback completes.
+- Pause audio when the Audio screen stops.
+- Do not let audio continue playing when navigating away.
+- Ensure audio and video never play at the same time.
+- Include the AB IT footer watermark.
+
+Because NavigationUI can preserve destination back stacks and ViewModels, explicitly coordinate audio and video playback so switching between them cannot leave one playing in the background.
+
+Bundle the sample audio in `app/src/main/res/raw/sample_audio.mp3` if the file can be obtained and verified.
+
+## 9. Media files and offline operation
+
+Try to bundle both media assets:
+
+- `sample_video.mp4` — H.264/AAC, ideally no more than approximately 5 MB.
+- `sample_audio.mp3` — ideally no more than approximately 10 MB.
+
+Possible sample sources:
+
+- `https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4`
+- `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3`
+
+Check the actual response status, file size, and file format. Do not save an HTML error page with an MP4 or MP3 extension.
+
+If a suggested source is unavailable or too large, find a suitable smaller, freely usable sample and credit it in README.md.
+
+If downloads are not possible in your environment, implement a documented URL-streaming fallback with asynchronous preparation and error handling. Tell me clearly that the media will require internet access in that case.
+
+Do not claim the application supports offline media playback unless the required media files are actually bundled.
+
+## 10. Edge-to-edge, lifecycle, and Android compatibility
+
+Keep the existing project's targetSdk and compileSdk.
+
+Requirements:
+- Use `enableEdgeToEdge()` where compatible with the existing template.
+- Apply WindowInsets correctly so toolbars, the drawer, footer, and media controls are not hidden behind system bars.
+- Handle Back using OnBackPressedDispatcher and current Android navigation practices.
+- Explicitly declare `android:exported` for every Activity.
+- Only MainActivity should be exported unless there is a verified requirement otherwise.
+- Do not use `android:configChanges` to bypass rotation handling.
+- Avoid deprecated APIs.
+- Use lifecycle-aware collection and resource management.
+- Release media players and unregister receivers at the correct time.
+- Ensure icon-only buttons have meaningful content descriptions.
+- Use at least 48dp touch targets.
+- Ensure light and dark themes are readable.
+- Handle orientation changes and process recreation where practical.
+- Prevent memory leaks and duplicate listeners.
+- Use only permissions that are actually required.
+
+## 11. Project structure
+
+Organize source code by feature. A suggested structure is:
+
+- `broadcast/`
+  - `BroadcastMode`
+  - `BroadcastFragment`
+  - `BroadcastInputActivity`
+  - `CustomReceiverActivity`
+  - `CustomMessageReceiver`
+  - Battery status helper and ViewModel
+- `image/`
+  - `ImageScaleFragment`
+  - `ZoomableImageView`
+- `video/`
+  - `VideoFragment`
+- `audio/`
+  - `AudioFragment`
+  - `AudioPlayerViewModel`
+- `MainActivity`
+- Shared UI components and reusable footer
+- Navigation graph and menu resources
+- Layouts, themes, strings, dimensions, drawables, and launcher icons
+
+Adapt this structure to the existing package name instead of arbitrarily changing the application ID.
+
+## 12. Development workflow
+
+### Phase 1 — Inspect the project
+
+Inspect:
+- Gradle files
+- `gradle/libs.versions.toml`
+- AndroidManifest.xml
+- Existing Kotlin package name
+- Existing layouts and resources
+- Existing launcher icon assets
+- Whether `AB IT Multimedia App Icon.png` is available
+
+Preserve the existing project's compatible configuration.
+
+### Phase 2 — Plan and implement
+
+Create a TODO checklist and work through:
+
+1. Project setup and shared branding
+2. Main Activity and Navigation Drawer
+3. Broadcast Receiver flow
+4. Image Scale
+5. Video
+6. Audio
+7. Playback coordination and lifecycle
+8. Tests
+9. Documentation
+10. Final build and verification
+
+Run `assembleDebug` after meaningful phases and fix errors before proceeding when possible.
+
+### Phase 3 — Git
+
+Initialize Git if needed. Commit after each working phase using clear imperative commit messages and short descriptions.
+
+Ensure `.gitignore` excludes build output, `local.properties`, and the assignment PDF if it is in the project directory.
+
+Do not push to a remote or add a remote repository.
+
+### Phase 4 — Tests
+
+Write unit tests for pure logic, including:
+- Battery percentage calculation.
+- Broadcast mode parsing.
+
+Add Espresso tests for:
+- Drawer navigation to all four destinations.
+- The complete custom broadcast flow: choose Custom, Proceed, enter `Hello CSE489`, tap Send, and verify the message in Activity 3.
+
+Run unit tests, instrumented tests when a device is connected, and lint. Fix verified errors.
+
+### Phase 5 — Emulator and device verification
+
+If an emulator or phone is available through ADB:
+
+- Install the app.
+- Run the available instrumented tests.
+- Test battery updates with `adb shell dumpsys battery set level 42`.
+- Restore the emulator battery with `adb shell dumpsys battery reset`.
+- Check Logcat for crashes.
+- Capture screenshots of every main screen and important workflow.
+- Save screenshots in `docs/images/`.
+- Inspect the screenshots for layout problems and fix them.
+
+Use `uiautomator dump`, ADB input commands, and `adb shell screencap -p` followed by `adb pull` where appropriate. Do not pipe binary screenshots through the shell.
+
+If no device is available, state this clearly. Still run the build, unit tests, and lint if the environment supports them.
+
+### Phase 6 — Documentation
+
+Create README.md containing:
+- Project overview.
+- Student information.
+- Features.
+- Requirement-to-file mapping table.
+- Tech stack and dependencies.
+- Build and run instructions.
+- How to test each feature.
+- Emulator battery-testing instructions.
+- Media source credits.
+- App icon integration details.
+- Screenshots and known limitations.
+
+Create PROJECT_GUIDE.md with a beginner-friendly viva explanation covering:
+- Fragments and Activities.
+- Navigation Drawer and Navigation Component.
+- Custom and system BroadcastReceivers.
+- Sticky battery broadcasts.
+- Receiver registration and export flags.
+- Why Activity 3 sends the custom broadcast.
+- Intent extras.
+- ViewModel and lifecycle.
+- ScaleGestureDetector and Matrix.
+- VideoView and MediaController.
+- MediaPlayer states, playback coordination, and cleanup.
+
+Use short code excerpts and explain why important implementation decisions were made.
+
+## 13. Definition of done
+
+Verify and report each item individually.
+
+- [ ] Four drawer items appear in the required order with exact labels.
+- [ ] Hamburger, toolbar title, drawer highlight, and Back behavior work.
+- [ ] Spinner contains the two exact broadcast options.
+- [ ] Proceed launches the correct Activity 2 workflow.
+- [ ] Custom text reaches the registered CustomMessageReceiver through an actual broadcast.
+- [ ] Battery Activity 2 displays live percentage, progress, charging status, and update time.
+- [ ] Battery Activity 3 performs no custom receiver operation.
+- [ ] Image loads and pinch-to-zoom, pan, and double-tap reset work.
+- [ ] Video plays inside the app with working controls.
+- [ ] Audio plays inside the app with working controls.
+- [ ] Audio and video never play simultaneously.
+- [ ] Media resources and receivers are cleaned up correctly.
+- [ ] Rotation preserves the appropriate screen state.
+- [ ] The custom AB IT launcher icon is integrated.
+- [ ] The original AB IT logo is used if its file is available.
+- [ ] `Developed by AB IT` appears on every required screen.
+- [ ] Student name and ID are correct.
+- [ ] README.md and PROJECT_GUIDE.md are complete.
+- [ ] Unit tests, lint, and build results are reported accurately.
+- [ ] Instrumented tests are run if a device is available.
+- [ ] Git commits are created for the completed phases.
+
+Do not mark an item complete unless you have verified it or clearly label it as unverified.
+
+## 14. Final delivery
+
+When finished, provide:
+
+1. A concise summary of the app.
+2. The checklist results.
+3. The project directory and ZIP location, if you can create a ZIP.
+4. The debug APK path, if a build succeeds.
+5. Build and test results.
+6. Screenshot locations.
+7. Whether the custom logo was found and integrated.
+8. Anything I still need to do manually.
+
+The final app must be functional, understandable for my viva, consistent with the attached assignment, and ready for demonstration and submission.
+
+Student: Arafat Haque Biswas
+Student ID: 24241325
+Course: CSE 489 — Mobile Application Development
+University: BRAC University
+Branding: AB IT
+Required footer watermark: Developed by AB IT
+Required logo file: AB IT Multimedia App Icon.png
+
+--- Prompt 3 (26 Oct 2026) ---
+
+Continue working on the existing AB IT Multimedia Android Studio project from exactly where you stopped.
+
+1. Inspect Before Continuing
+
+Inspect the current project files and identify what has already been completed.
+
+Review the original CSE 489 Assignment 2 requirements and my full original prompt.
+
+Check the current project state, build status, incomplete tasks, and missing features before making changes.
+
+Do not restart the project, recreate existing files unnecessarily, or overwrite working code.
+
+2. Complete the Remaining Work
+
+Continue implementing and testing all remaining requirements, including:
+
+All four navigation drawer features: Broadcast Receiver, Image Scale, Video, and Audio.
+
+Correct Activity and Fragment navigation and required broadcast receiver functionality.
+
+The supplied AB IT logo and launcher icon.
+
+The Developed by AB IT footer watermark on every required screen.
+
+Proper lifecycle handling, error handling, and UI behavior.
+
+All other requirements from my original prompt and the CSE 489 Assignment 2 PDF.
+
+3. Application Branding
+
+Application Name: AB IT Multimedia
+
+Launcher App Name: AB IT Multimedia
+
+Developer Branding: AB IT
+
+Footer Watermark: Developed by AB IT
+
+Student Name: Arafat Haque Biswas
+
+Student ID: 24241325
+
+Course: CSE 489 — Mobile Application Development
+
+University: BRAC University
+
+Set the launcher label to AB IT Multimedia in the appropriate strings.xml and Android manifest configuration.
+
+Locate my supplied logo file, AB IT Multimedia App Icon.png, and use it for the Android launcher icon, including adaptive and legacy icon assets where appropriate. Preserve the logo's proportions. Do not invent a replacement logo if the supplied file is unavailable; report the issue and explain what is needed.
+
+4. Build and Test
+
+Continue working step by step, preserving all existing progress.
+
+Run the appropriate Gradle build and relevant tests.
+
+Fix build errors and implementation issues where possible.
+
+If an Android device or emulator is available, install and test the application.
+
+Verify the required features before declaring the project complete.
+
+5. Session Limit and Handoff
+
+If you approach another session limit, leave the project in a stable state and provide a handoff summary containing:
+
+Completed work.
+
+Remaining tasks.
+
+Build errors or other known issues.
+
+Tests completed and their results.
+
+The exact next steps to continue.
+
+Do not claim that a feature works unless you have tested it or clearly state that it remains unverified. Do not claim the entire project is complete until the requirements have been checked.
+
+Start by inspecting the existing project and identifying the next unfinished task. Do not start over.
+
+--- Prompt 4 (26 Oct 2026, two parts sent together) ---
+
+### 7. Google Play Store Compatibility and Release Preparation
+
+In addition to completing my CSE 489 Assignment 2, review the project for compatibility with current Google Play Store requirements.
+
+Important: My primary requirement is to complete the university assignment correctly. Do not break or remove any required assignment feature just to prepare for Play Store publication.
+
+#### A. Verify Platform Requirements
+- Check the current official Android Developers and Google Play Console documentation.
+- Verify the required target SDK for a new app submission on the date of implementation.
+- Keep `minSdk` compatible with the assignment and intended devices, and use a suitable `compileSdk` and `targetSdk`.
+- If the assignment's existing configuration conflicts with current Play Store requirements, explain the conflict and propose a safe solution before making major changes.
+- Check Android permissions, exported components, receiver security, app compatibility, and runtime behavior against modern Android requirements.
+
+#### B. Build and Signing
+- Ensure the project builds successfully in Android Studio.
+- Verify the debug APK can be installed and launched.
+- Configure a release build and generate a signed Android App Bundle (`.aab`) when possible.
+- Explain how to create and securely manage the release signing key. Never expose or commit passwords, private signing keys, or secrets.
+- Do not upload or publish anything to Google Play Console without my explicit permission.
+
+#### C. App Quality and Policy Checks
+- Check for crashes, broken buttons, incorrect navigation, excessive permissions, and missing resources.
+- Verify the app icon, app name AB IT Multimedia, student assignment information, and Developed by AB IT footer.
+- Review the official Play Console requirements for the store listing, app content declarations, data safety, privacy policy, target audience, and content rating as applicable.
+- Determine whether this app actually collects or shares user data before preparing data-safety declarations. Do not invent privacy practices or claim compliance without evidence.
+- Check third-party media, image assets, logos, and dependencies for appropriate usage rights and attribution.
+- Prepare a README section explaining the build process, supported Android version range, permissions, test results, and known limitations.
+
+#### D. Testing and Publication Readiness
+- Run the app on an emulator or physical device where available.
+- Test every visible button and all four required assignment features.
+- Run relevant automated tests and available Android lint checks.
+- Verify the release build separately from the debug build.
+- Check the latest official Play Console testing requirements. If my developer account is subject to closed-testing requirements, document the steps and required tester participation.
+- Do not claim the app is published, approved, or Play Store-ready until the relevant checks have actually been completed.
+
+#### E. Final Report
+Provide separate statuses for:
+1. Assignment completion: whether all CSE 489 requirements pass.
+2. Build and device testing: what was actually built and tested.
+3. Release preparation: whether a signed release bundle is available.
+4. Google Play readiness: which requirements are verified, incomplete, or not applicable.
+5. Remaining manual steps: anything I must complete in Android Studio or Google Play Console.
+
+Keep the assignment working throughout this process. Prioritize verified functionality, a user-friendly interface, and accurate reporting over simply claiming completion.
+
+### Student Information and App Branding
+
+- Application Name: AB IT Multimedia
+- Developer Branding: AB IT
+- Footer Watermark: Developed by AB IT
+- Use the supplied AB IT logo as the launcher icon.
+
+Important rules for student information:
+
+- Do not display my personal name, student ID, course title, assignment number, or university name in the app UI by default.
+- Before adding these details, inspect the original CSE 489 Assignment 2 PDF and check whether they are explicitly required to appear inside the application.
+- If the assignment explicitly requires any of these details to appear in the app, include only the required details in a clean, appropriate location.
+- If the assignment does not require them, do not display them in the navigation drawer header, home screen, About screen, or other app screens.
+- Do not remove or alter any required app functionality to achieve this.
+- Keep the app focused on its four required features and maintain a clean, user-friendly interface.
+
+--- Prompt 5 (28 Oct 2026) ---
+
+Continue working on my existingt work. Do not restart the project, recreate the app, or undo any completed work.
+
+--- Prompt 6 (28 Oct 2026) ---
+
+creat AI_DECLARATION_SIMPLE.txt add my promte also inside
+
+(followed by this AI usage declaration form, which I filled in)
+
+------------------------------------------------------------
+4. AI-ASSISTED SECTIONS
+------------------------------------------------------------
+List specific files/sections where AI helped significantly:
+
+File: app/src/main/java/com/abit/multimedia/ (all Kotlin files)
+      Section: whole app - drawer, broadcast flow, Image Scale,
+      Video, Audio, About
+File: app/src/main/res/ (layouts, navigation graph, menus, strings,
+      themes, launcher icons)
+      Section: whole user interface
+File: app/src/test/ and app/src/androidTest/
+      Section: unit tests and Espresso tests
+File: app/build.gradle.kts, gradle/libs.versions.toml
+      Section: dependencies, release signing, R8 settings
+File: branding/generate_launcher_icons.sh
+      Section: launcher icons made from my logo
+File: README.md, PROJECT_GUIDE.md, docs/
+      Section: documentation, privacy policy, Google Play notes
+
+Not made by AI: branding/ab_it_multimedia_app_icon.png (my AB IT
+logo, supplied by me).
+
+------------------------------------------------------------
+5. DECLARATION
+------------------------------------------------------------
+I declare that:
+- This disclosure is complete and accurate
+- I understand all code in my submission
+- I can explain and modify my work if asked
+- I take full responsibility for my submission
+
+Signature: Arafat
+Date: 28 Oct 2026
+
+============================================================
