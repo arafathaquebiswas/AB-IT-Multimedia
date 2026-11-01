@@ -1,0 +1,237 @@
+============================================================
+           AI USAGE DECLARATION
+============================================================
+
+Name:       Arafat Haque Biswas
+Student ID: 24241325
+Assignment: 2
+Date:       28 Oct 2026
+
+------------------------------------------------------------
+1. AI TOOLS USED (check all that apply)
+------------------------------------------------------------
+[ ] None
+[ ] ChatGPT
+[x] GitHub Copilot   (in VS Code, for the commit "Update multimedia app")
+[ ] Google Gemini
+[x] Claude           (Claude Code in VS Code, model Claude Opus 5.5)
+[ ] Cursor
+[ ] Other: ________________
+
+------------------------------------------------------------
+2. PURPOSE OF AI USE (check all that apply)
+------------------------------------------------------------
+[x] Learning/understanding concepts
+[x] Debugging my code
+[x] Generating code snippets
+[x] Writing text content
+[x] Design/styling ideas
+[ ] Image generation
+[x] Other: making launcher icons and Play Store graphics from my
+           own AB IT logo (scripted image processing, not AI image
+           generation); building, testing and preparing a Google
+           Play release
+
+------------------------------------------------------------
+3. DESCRIPTION OF AI USE
+------------------------------------------------------------
+Briefly describe what you used AI for and how:
+
+I gave Claude (Claude Code, an AI coding agent running in VS Code
+on my Mac) the assignment PDF and a detailed written specification.
+All of my prompts are copied word for word right after this
+section.
+
+Working directly in my project folder, Claude:
+- created the Android Studio project and wrote the Kotlin code, XML
+  layouts and resources for the navigation drawer and the four
+  features: Broadcast Receiver (three Activities, custom and system
+  battery broadcasts), Image Scale (pinch-to-zoom), Video and Audio;
+- found the sample video and music, checked their licences and
+  added the credits;
+- turned my AB IT logo into the app's launcher icons with a script;
+- wrote unit tests and Espresso tests, ran the builds, tests and
+  lint, tested the app on an Android emulator and fixed the bugs it
+  found (for example Activity 3 opening twice, the video position
+  being lost, and a crash in the release build);
+- wrote README.md, PROJECT_GUIDE.md (explanations for my viva), the
+  privacy policy and the Google Play preparation notes, and set up
+  release signing.
+
+I provided the requirements, my AB IT logo and the branding,
+decided which personal details may appear in the app, and committed
+and pushed the work to GitHub myself. GitHub Copilot in VS Code was
+used for my commit "Update multimedia app" (26 Oct 2026).
+
+------------------------------------------------------------
+MY PROMPTS TO THE AI (part of section 3, copied word for word)
+------------------------------------------------------------
+
+--- Prompt 1 (25 Oct 2026) ---
+
+1. Inspect First
+
+Inspect the existing project, source code, Gradle configuration, and previous progress.
+
+Review the original assignment PDF and requirements.
+
+Identify completed features, unfinished tasks, build errors, and known issues.
+
+Continue from exactly where the previous session stopped.
+
+2. Complete All Assignment Features
+
+Ensure all four required features work correctly:
+
+Broadcast Receiver: Custom message broadcast, battery status, and the complete Activity workflow.
+
+Image Scale: Internet image loading, pinch-to-zoom, pan, and double-tap reset using ScaleGestureDetector and Matrix.
+
+Video: Functional VideoView, playback controls, and lifecycle management.
+
+Audio: Functional MediaPlayer, play/pause, stop, seek, and lifecycle management.
+
+Use the required Kotlin, XML Views, ViewBinding, Material Components, Fragments, Activities, ViewModels, and Navigation Component. No Jetpack Compose.
+
+3. AB IT Branding
+
+App name and launcher label: AB IT Multimedia
+
+Developer branding: AB IT
+
+Footer on every required screen: Developed by AB IT
+
+Find and integrate my original AB IT Multimedia App Icon.png as the adaptive and legacy launcher icon.
+
+Preserve the original logo without replacing it with an AI-generated logo.
+
+Do not display my personal name, student ID, course, or university inside the app unless the assignment PDF explicitly requires it.
+
+4. Code Quality and Compatibility
+
+Keep the existing application ID and compatible project configuration.
+
+Use beginner-friendly, clean, well-commented code suitable for my university viva.
+
+Handle rotation, navigation, Android lifecycle, permissions, errors, and resource cleanup correctly.
+
+Ensure audio and video cannot play simultaneously.
+
+Avoid deprecated APIs and unnecessary dependencies.
+
+Maintain a professional UI with proper light/dark themes and edge-to-edge support.
+
+5. Testing and Verification
+
+Build the project and fix verified errors.
+
+Run unit tests, instrumented tests, and lint where available.
+
+Test all four features and navigation.
+
+Check receiver registration, battery updates, media playback, and rotation.
+
+Use an emulator or physical device if available.
+
+Never claim something works unless it has actually been verified.
+
+6. Google Play Store Preparation
+
+After prioritizing assignment completion:
+
+Verify current official Android and Google Play requirements.
+
+Review target SDK, permissions, exported components, and security.
+
+Check app quality, dependencies, media licenses, and privacy requirements.
+
+Prepare debug APK and signed release AAB if possible.
+
+Never publish the app or upload anything to Play Console without my permission.
+
+Clearly separate assignment completion from Play Store readiness.
+
+7. Documentation and Git
+
+Maintain:
+
+README.md — project overview, features, dependencies, setup, testing, and limitations.
+
+PROJECT_GUIDE.md — beginner-friendly explanations for my viva.
+
+AI_DECLARATION_SIMPLE.txt — include my AI usage declaration and relevant original prompts.
+
+Use Git commits for meaningful completed phases. Do not push to a remote repository.
+
+8. Important Working Rules
+
+Work autonomously and complete the implementation, not just provide suggestions.
+
+Preserve existing working code and progress.
+
+Do not remove assignment requirements for Play Store compatibility.
+
+Do not invent missing assets, test results, or completed features.
+
+If a resource cannot be downloaded, document the limitation and provide a suitable fallback.
+
+If approaching a session limit, leave the project stable and provide a detailed handoff.
+
+9. Final Report
+
+Provide:
+
+Completed and remaining assignment requirements.
+
+Build, test, and lint results.
+
+Debug APK and project ZIP locations, if available.
+
+Release AAB status.
+
+Screenshots and documentation locations.
+
+Whether the original AB IT logo was integrated.
+
+Google Play readiness status.
+
+Remaining manual tasks.
+
+Start by inspecting the existing project and identifying the next unfinished task. Do not start over
+
+------------------------------------------------------------
+4. AI-ASSISTED SECTIONS
+------------------------------------------------------------
+List specific files/sections where AI helped significantly:
+
+File: app/src/main/java/com/abit/multimedia/ (all Kotlin files)
+      Section: whole app - drawer, broadcast flow, Image Scale,
+      Video, Audio, About
+File: app/src/main/res/ (layouts, navigation graph, menus, strings,
+      themes, launcher icons)
+      Section: whole user interface
+File: app/src/test/ and app/src/androidTest/
+      Section: unit tests and Espresso tests
+File: app/build.gradle.kts, gradle/libs.versions.toml
+      Section: dependencies, release signing, R8 settings
+File: branding/generate_launcher_icons.sh
+      Section: launcher icons made from my logo
+File: README.md, PROJECT_GUIDE.md, docs/
+      Section: documentation, privacy policy, Google Play notes
+
+Not made by AI: branding/ab_it_multimedia_app_icon.png (my AB IT
+logo, supplied by me).
+
+------------------------------------------------------------
+5. DECLARATION
+------------------------------------------------------------
+I declare that:
+- This disclosure is complete and accurate
+- I understand all code in my submission
+- I can explain and modify my work if asked
+- I take full responsibility for my submission
+
+Signature: Arafat
+Date: 28 Oct 2026
+
+============================================================
